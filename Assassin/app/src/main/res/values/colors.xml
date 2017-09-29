@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">#6f80db</color>
+    <color name="colorAccent">#0075b7</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#808080 </color>
+    <color name="colorGreyLight">#E0E0E0 </color>
+    <color name="colorBlue">#4169E1</color>
+    <color name="warning_color">#f4511e</color>
+    <color name="hint_color">#42000000</color>
+    <color name="success_color">#009688</color>
+    <color name="colorBlack">#000000</color>
+    <color name="facebookBlue">#3B5998</color>
+    <color name="twitterBlue">#4099FF</color>
+    <color name="instagramBlue">#4c68d7</color>
+    <color name="googleRed">#dd4b39</color>
+    <color name="whatsupGreen">#4dc247</color>
+    <color name="mycoolred">#00918a</color>
+
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar4"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:layout_gravity="center"
+                android:id="@+id/toolbar_title"
+                android:typeface="monospace"
+                android:textSize="40dp"
+                android:textColor="@color/colorWhite"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+        </RelativeLayout>
+
+        <!--<Button-->
+        <!--android:id="@+id/addAccountKey"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Link Account Key"-->
+        <!--android:layout_below="@+id/topBar"-->
+        <!--android:layout_alignEnd="@+id/addEventName"-->
+        <!--android:layout_marginTop="24dp" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/addEventName"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Link Event Name"-->
+        <!--android:layout_marginTop="24dp"-->
+        <!--android:layout_below="@+id/addAccountKey"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

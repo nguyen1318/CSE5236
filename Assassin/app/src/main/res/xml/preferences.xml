@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--<PreferenceCategory-->
+    <!--android:title="@string/inline_preferences"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<CheckBoxPreference-->
+    <!--android:key="checkbox_preference"-->
+    <!--android:title="@string/title_checkbox_preference"-->
+    <!--android:summary="@string/summary_checkbox_preference" />-->
+
+    <!--</PreferenceCategory>-->
+
+    <PreferenceCategory
+        android:title="@string/general">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_1"
+            android:title="Notifications" />
+
+        <ListPreference
+            android:key="list_preference"
+            android:title="@string/title_list_preference"
+            android:summary="@string/summary_list_preference"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:dialogTitle="@string/dialog_title_list_preference" />
+
+        <ListPreference
+            android:key="list_languages"
+            android:title="@string/title_languages"
+            android:summary="@string/summary_languages"
+            android:entries="@array/entries_languages"
+            android:entryValues="@array/entryvalues_languages"
+            android:dialogTitle="@string/dialog_title_languages" />
+
+        <Preference android:title="Save Memories to Camera Roll"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/launch_preferences">
+
+        <PreferenceScreen
+            android:key="screen_preference"
+            android:title="@string/title_screen_preference"
+            android:summary="@string/summary_screen_preference">
+
+            <!-- Sub Screen -->
+
+            <EditTextPreference
+                android:id="@+id/webhookEditText"
+                android:key="add_key"
+                android:title="@string/title_add_key"
+                android:summary="@string/summary_add_key"
+                android:dialogTitle="@string/dialog_title_add_key" />
+
+            <EditTextPreference
+                android:id="@+id/eventkeyEditText"
+                android:key="add_event_name"
+                android:title="@string/title_add_event_name"
+                android:summary="@string/summary_add_event_name"
+                android:dialogTitle="@string/dialog_title_add_event_name" />
+
+            <EditTextPreference
+                android:id="@+id/primaryEditText"
+                android:key="edittext_messagesafe"
+                android:title="@string/title_messagesafe"
+                android:dialogTitle="@string/dialog_title_messagesafe" />
+            <!--android:summary="@string/summary_messagesafe"-->
+
+
+            <EditTextPreference
+                android:id="@+id/primary1EditText"
+                android:key="edittext_messagehelp"
+                android:title="@string/title_messagehelp"
+                android:dialogTitle="@string/dialog_title_messagehelp" />
+            <!--android:summary="@string/summary_messagehelp"-->
+
+
+            <!--<EditTextPreference-->
+            <!--android:id="@+id/eventFacebook"-->
+            <!--android:key="link_facebook"-->
+            <!--android:title="@string/title_link_facebook"-->
+            <!--android:summary="@string/summary_link_facebook"-->
+            <!--android:dialogTitle="@string/dialog_title_link_facebook" />-->
+
+            <!--<EditTextPreference-->
+            <!--android:id="@+id/eventTwitter"-->
+            <!--android:key="link_twitter"-->
+            <!--android:title="@string/title_link_twitter"-->
+            <!--android:summary="@string/summary_link_twitter"-->
+            <!--android:dialogTitle="@string/dialog_title_link_twitter" />-->
+
+            <!--<EditTextPreference-->
+            <!--android:id="@+id/eventGooogle"-->
+            <!--android:key="link_google"-->
+            <!--android:title="@string/title_link_google"-->
+            <!--android:summary="@string/summary_link_google"-->
+            <!--android:dialogTitle="@string/dialog_title_link_google" />-->
+
+            <!--<EditTextPreference-->
+            <!--android:id="@+id/eventWhatsapp"-->
+            <!--android:key="link_whatapp"-->
+            <!--android:title="@string/title_link_whatapp"-->
+            <!--android:summary="@string/summary_link_whatapp"-->
+            <!--android:dialogTitle="@string/dialog_title_link_whatapp" />-->
+
+            <!--<EditTextPreference-->
+            <!--android:id="@+id/eventInstagram"-->
+            <!--android:key="link_instagram"-->
+            <!--android:title="@string/title_link_instagram"-->
+            <!--android:summary="@string/summary_link_instagram"-->
+            <!--android:dialogTitle="@string/dialog_title_link_instagram" />-->
+
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="@string/title_intent_preference"
+            android:summary="@string/summary_intent_preference">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://ifttt.com/discover" />
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/security">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_2"
+            android:title="Location Services" />
+
+        <EditTextPreference
+            android:key="edittext_preference"
+            android:title="@string/email"
+            android:summary="@string/email_edittext_preference"
+            android:dialogTitle="@string/email_title_edittext_preference" />
+
+        <EditTextPreference
+            android:key="password2"
+            android:title="@string/password2"
+            android:summary="@string/password2_edittext_preference"
+            android:dialogTitle="@string/password2_title_edittext_preference"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_more">
+
+        <Preference android:title="Support"
+            android:key="@string/myCoolButton" />
+
+        <Preference android:title="Privacy Policy"
+            android:key="@string/myCoolButton"/>
+
+        <Preference android:title="Terms of Service"
+            android:key="@string/myCoolButton"/>
+
+        <Preference android:title="Licenses"
+            android:key="@string/myCoolButton"/>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

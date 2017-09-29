@@ -1,0 +1,167 @@
+<resources>
+    <string name="app_name">ASSASSINS</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="search_bar">Search</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_name">NAME</string>
+    <string name="prompt_email">EMAIL</string>
+    <string name="prompt_password">PASSWORD</string>
+    <string name="prompt_confirm">CONFIRM PASSWORD</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">LOGIN</string>
+    <string name="sign_in_finger">LOGIN WITH FINGERPRINT</string>
+    <string name="action_register">CREATE ACCOUNT</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_same_email">This email address is already being used</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_mismatch_password">The passwords do not match</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="login_with_password">Login with Password</string>
+
+    <!-- Strings related to Settings -->
+    <string name="action_add">ADD</string>
+    <string name="application_name">FingerprintDialog</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_help">Help</string>
+    <string name="cancel">Cancel</string>
+    <string name="use_password">Use password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="ok">OK</string>
+    <string name="password">Password</string>
+    <string name="fingerprint_description">Confirm fingerprint to continue</string>
+    <string name="fingerprint_hint">Touch sensor</string>
+    <string name="password_description">Enter your store password to continue</string>
+    <string name="purchase">Purchase</string>
+    <string name="purchase_not_invalidated">Purchase not invalidated</string>
+    <string name="purchase_button_not_invalidated_description">
+        You can proceed to purchase with this button \n even if a new fingerprint is enrolled
+    </string>
+    <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
+    <string name="fingerprint_success">Fingerprint recognized</string>
+    <string name="item_title">White Mesh Pluto Backpack</string>
+    <string name="item_price">$62.68</string>
+    <string name="item_description">Mesh backpack in white. Black textile trim throughout.</string>
+    <string name="purchase_done">Purchase successful</string>
+    <string name="new_fingerprint_enrolled_description">A new fingerprint was added to this device, so your password is required.</string>
+    <string name="use_fingerprint_in_future">Use fingerprint in the future</string>
+    <string name="use_fingerprint_to_authenticate_title">Use fingerprint to authenticate</string>
+    <string name="use_fingerprint_to_authenticate_key">use_fingerprint_to_authenticate_key</string>
+    <string name="description_bugdroid_icon">Android bugdroid image</string>
+    <string name="description_fingerprint_icon">Fingerprint icon</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+
+    <!--begin security-->
+    <string name="security">Security</string>
+    <string name="inline_preferences">Security</string>
+
+    <string name="email">Email</string>
+    <string name="email_edittext_preference">Change your email here.</string>
+    <string name="email_title_edittext_preference">Enter your email.</string>
+
+    <string name="password2">Password</string>
+    <string name="password2_edittext_preference">Change your password here.</string>
+    <string name="password2_title_edittext_preference">Enter your new password.</string>
+    <!--end security-->
+
+    <!--General Settings-->
+    <string name="general">General Settings</string>
+    <string name="launch_preferences">Connect</string>
+
+    <string name="title_list_preference">Theme</string>
+    <string name="summary_list_preference">ASSASSINS comes preloaded with various themes.</string>
+    <string name="dialog_title_list_preference">Choose one</string>
+
+    <string-array name="entries_list_preference">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Inverted</item>
+    </string-array>
+
+    <string-array name="entryvalues_list_preference">
+        <item>Alpha</item>
+        <item>Beta</item>
+        <item>Charlie</item>
+    </string-array>
+
+    <string name="title_languages">Languages</string>
+    <string name="summary_languages">Select a language.</string>
+    <string name="dialog_title_languages">Choose one</string>
+
+    <string-array name="entries_languages">
+        <item>English</item>
+        <item>Español</item>
+        <item>中文</item>
+        <item>عربى</item>
+
+    </string-array>
+
+    <string-array name="entryvalues_languages">
+        <item>Alpha</item>
+        <item>Beta</item>
+        <item>Charlie</item>
+        <item>Delta</item>
+    </string-array>
+    <!--End general-->
+
+    <!--Begin Connect-->
+    <string name="title_screen_preference">Link Social Media</string>
+    <string name="summary_screen_preference">Choose other apps to connect Roam with.</string>
+
+    <string name="title_add_key">Add Webhook Key</string>
+    <string name="summary_add_key">Adding a Webhook Key allows us to connect to social media.</string>
+    <string name="dialog_title_add_key">Enter your key here!</string>
+
+    <string name="title_add_event_name">Add Event Name</string>
+    <string name="summary_add_event_name">The event name helps us know where to share your posts. </string>
+    <string name="dialog_title_add_event_name">Enter your event name here!</string>
+
+    <string name="title_messagesafe">Add Primary Message</string>
+    <!--<string name="summary_messagesafe">This is the safe message. </string>-->
+    <string name="dialog_title_messagesafe">Enter your primary message here!</string>
+
+    <string name="title_messagehelp">Add Secondary Message</string>
+    <!--<string name="summary_messagehelp">This is the help message. </string>-->
+    <string name="dialog_title_messagehelp">Enter your secondary message here!</string>
+
+    <!--<string name="title_link_facebook">Link Facebook</string>-->
+    <!--<string name="summary_link_facebook">Add your event name for Facebook to share posts.  </string>-->
+    <!--<string name="dialog_title_link_facebook">Enter your event name here!</string>-->
+
+    <!--<string name="title_link_twitter">Link Twitter</string>-->
+    <!--<string name="summary_link_twitter">Add your event name for Twitter to share posts. </string>-->
+    <!--<string name="dialog_title_link_twitter">Enter your event name here!</string>-->
+
+    <!--<string name="title_link_google">Link Google+</string>-->
+    <!--<string name="summary_link_google">Add your event name for Google+ to share posts.</string>-->
+    <!--<string name="dialog_title_link_google">Enter your event name here!</string>-->
+
+    <!--<string name="title_link_whatapp">Link WhatsApp</string>-->
+    <!--<string name="summary_link_whatapp">Add your event name for WhatsApp to share posts. </string>-->
+    <!--<string name="dialog_title_link_whatapp">Enter your event name here!</string>-->
+
+    <!--<string name="title_link_instagram">Link Instagram</string>-->
+    <!--<string name="summary_link_instagram">Add your event name for Instagram to share posts. </string>-->
+    <!--<string name="dialog_title_link_instagram">Enter your event name here!</string>-->
+
+    <string name="title_intent_preference">Launch IFTTT</string>
+    <string name="summary_intent_preference">Visit this webpage to set up an account and receive a webhook key.</string>
+    <!--End Connect-->
+
+
+
+    <string name="title_more">More Information</string>
+    <string name="myCoolButton">Button</string>
+    <string name="logoutButton">Log Out</string>
+
+
+</resources>
