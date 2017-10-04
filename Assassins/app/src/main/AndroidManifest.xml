@@ -21,6 +21,9 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.tony_justin.mobile_app.assassins.ActivityHelp" />
         <activity android:name="com.tony_justin.mobile_app.assassins.ActivitySettings"/>
+        <activity android:name="com.tony_justin.mobile_app.assassins.MainActivity"/>
+        <activity android:name="com.tony_justin.mobile_app.assassins.ActivityConnect"/>
+        <activity android:name="com.tony_justin.mobile_app.assassins.ActivitySearch"/>
 
         <activity android:name="com.tony_justin.mobile_app.assassins.LoginActivity">
             <intent-filter>
@@ -31,7 +34,6 @@
         </activity>
 
         <activity android:name="com.tony_justin.mobile_app.assassins.RegisterActivity" />
-        <activity android:name="com.tony_justin.mobile_app.assassins.ActivityConnect" />
 
 
     </application>
