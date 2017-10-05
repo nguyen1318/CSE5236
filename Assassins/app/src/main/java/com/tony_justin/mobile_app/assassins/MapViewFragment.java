@@ -1,6 +1,5 @@
 package com.tony_justin.mobile_app.assassins;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import com.tony_justin.mobile_app.assassin.R;
  * Created by Tony Nguyen on 10/4/2017.
  */
 
-public class MapViewFragment extends Fragment {
+public class MapViewFragment extends android.support.v4.app.Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;

@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">ASSASSINS</string>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+    AIzaSyBD5fr8iK4DZXml7t2VkGetNWBpXKRdgjY
+    </string>
+
 
     <string name="title_activity_login">Sign in</string>
     <string name="search_bar">Search</string>
