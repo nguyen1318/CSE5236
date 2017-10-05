@@ -52,42 +52,6 @@ public class UserPreferenceFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-
-        Preference webhook_pref = (Preference) findPreference("add_key");
-        final EditTextPreference webhook = (EditTextPreference) webhook_pref;
-        webhook.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                return true;
-            }
-        });
-
-        Preference event_pref = (Preference) findPreference("add_event_name");
-        final EditTextPreference event = (EditTextPreference) event_pref;
-        event.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                return true;
-            }
-        });
-
-        Preference messagesafe_pref = (Preference) findPreference("edittext_messagesafe");
-        final EditTextPreference messagesafe = (EditTextPreference) messagesafe_pref;
-        messagesafe.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                return true;
-            }
-        });
-
-        Preference messagehelp_pref = (Preference) findPreference("edittext_messagehelp");
-        final EditTextPreference messagehelp = (EditTextPreference) messagehelp_pref;
-        messagehelp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                return true;
-            }
-        });
     }
 
 //    @Override

@@ -24,6 +24,7 @@
         <activity android:name="com.tony_justin.mobile_app.assassins.MainActivity"/>
         <activity android:name="com.tony_justin.mobile_app.assassins.ActivityConnect"/>
         <activity android:name="com.tony_justin.mobile_app.assassins.ActivitySearch"/>
+        <activity android:name="com.tony_justin.mobile_app.assassins.CurrentGameActivity"/>
 
         <activity android:name="com.tony_justin.mobile_app.assassins.LoginActivity">
             <intent-filter>

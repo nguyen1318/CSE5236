@@ -41,7 +41,6 @@ public class ActivitySearch extends AppCompatActivity implements NavigationView.
 
     ArrayAdapter<String> searchAdapter;
     List<String> searchArray;
-    DatabaseHelper mDatabaseHelper;
     ListView mSearchList;
 
     private DrawerLayout drawer;
@@ -72,11 +71,6 @@ public class ActivitySearch extends AppCompatActivity implements NavigationView.
 
         mSearchList = (ListView) findViewById(R.id.searchList);
         searchArray = new ArrayList<String>();
-        mDatabaseHelper = new DatabaseHelper(this);
-        Cursor data = mDatabaseHelper.getData();
-
-        addDefaultLocations();
-        addItems(data);
 
         searchAdapter = new ArrayAdapter<String>(this, R.layout.list_item, searchArray);
         mSearchList.setAdapter(searchAdapter);
@@ -96,23 +90,6 @@ public class ActivitySearch extends AppCompatActivity implements NavigationView.
 
     }
 
-    private void addItems(Cursor data) {
-        while(data.moveToNext()){
-            String caption = data.getString(2);
-            String location = "Location: (" + data.getDouble(3) + ", " + data.getDouble(4) + ")";
-            searchArray.add(caption + "\n" + location);
-        }
-    }
-
-    private void addDefaultLocations() {
-        searchArray.add("Booz Allen Hamilton \nLocation: (38.901712, -77.033035)");
-        searchArray.add("Washington DC Capital Building \nLocation: (38.890214, -77.008997)");
-        searchArray.add("Jefferson Memorial \nLocation: (38.881563, -77.036457)");
-        searchArray.add("WWII Memorial \nLocation: (38.889414, -77.040477)");
-        searchArray.add("Washington Capitals Game \nLocation: (N/A, N/A)");
-        searchArray.add("Washington Nationals Game \nLocation: (N/A, N/A)");
-        searchArray.add("Washington Wizards Game \nLocation: (N/A, N/A)");
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

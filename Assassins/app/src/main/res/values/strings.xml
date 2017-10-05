@@ -133,25 +133,25 @@
     <!--<string name="summary_messagehelp">This is the help message. </string>-->
     <string name="dialog_title_messagehelp">Enter your secondary message here!</string>
 
-    <!--<string name="title_link_facebook">Link Facebook</string>-->
-    <!--<string name="summary_link_facebook">Add your event name for Facebook to share posts.  </string>-->
-    <!--<string name="dialog_title_link_facebook">Enter your event name here!</string>-->
+    <string name="title_link_facebook">Link Facebook</string>
+    <string name="summary_link_facebook">Add your event name for Facebook to share posts.  </string>
+    <string name="dialog_title_link_facebook">Enter your event name here!</string>
 
-    <!--<string name="title_link_twitter">Link Twitter</string>-->
-    <!--<string name="summary_link_twitter">Add your event name for Twitter to share posts. </string>-->
-    <!--<string name="dialog_title_link_twitter">Enter your event name here!</string>-->
+    <string name="title_link_twitter">Link Twitter</string>
+    <string name="summary_link_twitter">Add your event name for Twitter to share posts. </string>
+    <string name="dialog_title_link_twitter">Enter your event name here!</string>
 
-    <!--<string name="title_link_google">Link Google+</string>-->
-    <!--<string name="summary_link_google">Add your event name for Google+ to share posts.</string>-->
-    <!--<string name="dialog_title_link_google">Enter your event name here!</string>-->
+    <string name="title_link_google">Link Google+</string>
+    <string name="summary_link_google">Add your event name for Google+ to share posts.</string>
+    <string name="dialog_title_link_google">Enter your event name here!</string>
 
-    <!--<string name="title_link_whatapp">Link WhatsApp</string>-->
-    <!--<string name="summary_link_whatapp">Add your event name for WhatsApp to share posts. </string>-->
-    <!--<string name="dialog_title_link_whatapp">Enter your event name here!</string>-->
+    <string name="title_link_whatapp">Link WhatsApp</string>
+    <string name="summary_link_whatapp">Add your event name for WhatsApp to share posts. </string>
+    <string name="dialog_title_link_whatapp">Enter your event name here!</string>
 
-    <!--<string name="title_link_instagram">Link Instagram</string>-->
-    <!--<string name="summary_link_instagram">Add your event name for Instagram to share posts. </string>-->
-    <!--<string name="dialog_title_link_instagram">Enter your event name here!</string>-->
+    <string name="title_link_instagram">Link Instagram</string>
+    <string name="summary_link_instagram">Add your event name for Instagram to share posts. </string>
+    <string name="dialog_title_link_instagram">Enter your event name here!</string>
 
     <string name="title_intent_preference">Launch IFTTT</string>
     <string name="summary_intent_preference">Visit this webpage to set up an account and receive a webhook key.</string>

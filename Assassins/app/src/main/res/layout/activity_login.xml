@@ -86,16 +86,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"/>
 
-            <!--<Button-->
-            <!--android:id="@+id/sign_in_with_fingerprint"-->
-            <!--android:background="@drawable/rounded_button"-->
-            <!--style="?android:textAppearanceSmall"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="@string/sign_in_finger"-->
-            <!--android:textStyle="bold" />-->
-
             <TextView android:id="@+id/email_register_button_login"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"

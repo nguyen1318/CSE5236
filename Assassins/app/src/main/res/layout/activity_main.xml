@@ -18,6 +18,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></FrameLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/startNewGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start New Game"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/currentGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resume Current Game"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/startNewGame"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/gameInvites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Invitations"
+            android:layout_marginTop="77dp"
+            android:layout_alignTop="@+id/currentGame"
+            android:layout_centerHorizontal="true"
+            android:onClick=""/>
+
+        <Button
+            android:id="@+id/myStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Stats"
+            android:layout_marginBottom="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

@@ -1,12 +1,17 @@
 package com.tony_justin.mobile_app.assassins;
 
 import android.Manifest;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -60,12 +66,17 @@ public class MainActivity extends AppCompatActivity implements
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    Button startNewGame;
+    Button currentGame;
+    Button gameInvites;
+    Button myStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Nav Drawer Stuff ------------------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -98,8 +109,9 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(logOut);
             }
         });
+        // Done Nav Drawer -------------------------------------------------------------------------
 
-        //Location -------------------------------------------------------
+        //Location API -----------------------------------------------------------------------------
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -117,12 +129,50 @@ public class MainActivity extends AppCompatActivity implements
                 }, 10);
             }
         }
+
+        // Game Menu Buttons -----------------------------------------------------------------------
+        startNewGame = (Button) findViewById(R.id.startNewGame);
+        currentGame = (Button) findViewById(R.id.currentGame);
+        gameInvites = (Button) findViewById(R.id.gameInvites);
+        myStats = (Button) findViewById(R.id.myStats);
+
+        startNewGame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Make a pop-up dialog box asking if they want to start a new game?
+                // It will delete their previous game since only one game is allowed at a time.
+                Toast.makeText(MainActivity.this, "Starting New Game", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        currentGame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Bring up their current game, people in it, fragment with map, etc.
+                Intent currentGameIntent = new Intent(MainActivity.this, CurrentGameActivity.class);
+                MainActivity.this.startActivity(currentGameIntent);
+                Toast.makeText(MainActivity.this, "Resuming Current Game", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        gameInvites.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Show the game invitations they received
+                Toast.makeText(MainActivity.this, "Getting Invites", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        myStats.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Show pedometer for the day, kills for the week, deaths for the week
+                // Calories burned, distance walked
+                Toast.makeText(MainActivity.this, "Showing Stats", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
-    //Done Location---------------------------------------------------------------------------------
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LocationFragment());
+        //adapter.addFragment(new GameMenuFragment());
         viewPager.setAdapter(adapter);
     }
 
@@ -165,14 +215,6 @@ public class MainActivity extends AppCompatActivity implements
         //close navigation drawer
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
-        View mDrawerListView = inflater.inflate(R.layout.drawer_list_item, container, false);
-        mDrawerListView.setFitsSystemWindows(true);
-        return mDrawerListView;
     }
 
     @Override
