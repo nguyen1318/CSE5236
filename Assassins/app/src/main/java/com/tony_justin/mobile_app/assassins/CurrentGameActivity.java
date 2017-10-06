@@ -39,7 +39,7 @@ public class CurrentGameActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new MapViewFragment(), "Game Map View");
-        //adapter.addFragment(new Tab2Fragment(), "TAB2");
+        adapter.addFragment(new CurrentGameStatsFragment(), "Current Game Stats");
         viewPager.setAdapter(adapter);
     }
 
