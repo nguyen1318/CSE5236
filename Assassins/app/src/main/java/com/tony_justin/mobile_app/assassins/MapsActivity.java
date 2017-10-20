@@ -7,13 +7,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -28,6 +31,9 @@ import android.widget.Button;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.gcm.Task;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,86 +41,51 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.tony_justin.mobile_app.assassin.R;
 
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
-        NavigationView.OnNavigationItemSelectedListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener {
 
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private GoogleMap mMap;
     double lat;
     double lon;
     private GoogleApiClient mGoogleApiClient;
     private Location mLocation;
+    private Location mLastLocation;
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private static final long FASTEST_INTERVAL = 2000;
     private static final long UPDATE_INTERVAL = 10000;
 
-    private DrawerLayout drawer;
-    private NavigationView navigationView;
 
     private final String TAG = getClass().getSimpleName();
+    private boolean mLocationPermissionGranted;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private Marker mCurrLocationMarker;
 
-    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        getLocationPermission();
+
+        // Construct a FusedLocationProviderClient.
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         Log.d(TAG,"Maps Activity Created");
-
-        // Nav Drawer Stuff ------------------------------------------------------------------------
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        Menu menu = navigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
-
-        //mViewPager = (ViewPager) findViewById(R.id.container);
-        //setupViewPager(mViewPager);
-//        FragmentManager mFragmentManager = getFragmentManager();
-//        FragmentTransaction mFragmentTransaction = mFragmentManager
-//                .beginTransaction();
-//        UserPreferenceFragment mPrefsFragment = new UserPreferenceFragment();
-//        mFragmentTransaction.replace(R.id.map, mPrefsFragment);
-//        mFragmentTransaction.commit();
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        Button connectLogout = (Button)findViewById(R.id.connectLogout);
-        connectLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent loginScreen = new Intent(MapsActivity.this, LoginActivity.class);
-                ComponentName cn = loginScreen.getComponent();
-
-                Intent logOut = IntentCompat.makeRestartActivityTask(cn);
-
-                startActivity(logOut);
-            }
-        });
-        // Done Nav Drawer -------------------------------------------------------------------------
-
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -122,17 +93,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .build();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        //adapter.addFragment(new GameMenuFragment());
-        viewPager.setAdapter(adapter);
-    }
 
     /**
      * Manipulates the map once available.
@@ -147,11 +113,105 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng myLocation = new LatLng(lat, lon);
-        mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker on my location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+        //Initialize Google Play Services
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                //Location Permission already granted
+                buildGoogleApiClient();
+                mMap.setMyLocationEnabled(true);
+            } else {
+                //Request Location Permission
+                getLocationPermission();
+            }
+        }
+        else {
+            buildGoogleApiClient();
+            mMap.setMyLocationEnabled(true);
+        }
+
+        // Add a marker
+//        LatLng myLocation = new LatLng(lat, lon);
+//        mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker on my location"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+//        //mMap.animateCamera(CameraUpdateFactory.zoomTo(100));
+//        Circle circle = mMap.addCircle(new CircleOptions()
+//                .center(new LatLng(-33.87365, 151.20689))
+//                .radius(10000)
+//                .strokeColor(Color.BLUE)
+//                .fillColor(Color.TRANSPARENT));
+
+        // Do other setup activities here too, as described elsewhere in this tutorial.
+
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
     }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+    private void getLocationPermission() {
+    /*
+     * Request location permission, so that we can get the location of the
+     * device. The result of the permission request is handled by a callback,
+     * onRequestPermissionsResult.
+     */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        mLocationPermissionGranted = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mLocationPermissionGranted = true;
+                }
+            }
+        }
+        updateLocationUI();
+    }
+
+    private void updateLocationUI() {
+        if (mMap == null) {
+            return;
+        }
+        try {
+            if (mLocationPermissionGranted) {
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            } else {
+                mMap.setMyLocationEnabled(false);
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                mLastLocation = null;
+                getLocationPermission();
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
+
 
     //Google API Client Location Functions----------------------------------------------------------
     @Override
@@ -174,8 +234,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mLocation != null) {
             lat = mLocation.getLatitude();
             lon = mLocation.getLongitude();
-        } else {
-            // Toast.makeText(this, "Location not Detected", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -225,49 +283,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     @Override
     public void onLocationChanged(Location location) {
-        lat = location.getLatitude();
-        lon = location.getLongitude();
-        LatLng myLocation = new LatLng(lat, lon);
-        mMap.addMarker(new MarkerOptions().position(myLocation).icon(BitmapDescriptorFactory.defaultMarker()).title("Marker on my location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+//        lat = location.getLatitude();
+//        lon = location.getLongitude();
+//        LatLng myLocation = new LatLng(lat, lon);
+//        mMap.addMarker(new MarkerOptions().position(myLocation).icon(BitmapDescriptorFactory.defaultMarker()).title("Marker on my location"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(100));
+
+        mLastLocation = location;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+
+        //Place current location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Current Position");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,20));
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
+    public void onPause() {
+        super.onPause();
 
-            case R.id.ic_home: {
-                Intent searchIntent = new Intent(MapsActivity.this, MainActivity.class);
-                MapsActivity.this.startActivity(searchIntent);
-                break;
-            }
-            case R.id.ic_search: {
-                Intent searchIntent = new Intent(MapsActivity.this, ActivitySearch.class);
-                MapsActivity.this.startActivity(searchIntent);
-                break;
-            }
-            case R.id.ic_connect: {
-                Intent connectIntent = new Intent(MapsActivity.this, ActivityConnect.class);
-                MapsActivity.this.startActivity(connectIntent);
-                break;
-            }
-            case R.id.ic_settings: {
-                Intent settingsIntent = new Intent(MapsActivity.this, ActivitySettings.class);
-                MapsActivity.this.startActivity(settingsIntent);
-                break;
-            }
-            case R.id.ic_help: {
-                Intent helpIntent = new Intent(MapsActivity.this, ActivityHelp.class);
-                MapsActivity.this.startActivity(helpIntent);
-                break;
-            }
+        //stop location updates when Activity is no longer active
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
-        //close navigation drawer
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
+
 
     //End of Google API Location Service Functions -------------------------------------------------
 
