@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ASSASSINS</string>
-    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
     AIzaSyBD5fr8iK4DZXml7t2VkGetNWBpXKRdgjY
     </string>
 
@@ -61,7 +61,6 @@
     <string name="description_fingerprint_icon">Fingerprint icon</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
 
 
     <!--begin security-->
@@ -162,10 +161,10 @@
     <!--End Connect-->
 
 
-
     <string name="title_more">More Information</string>
     <string name="myCoolButton">Button</string>
     <string name="logoutButton">Log Out</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

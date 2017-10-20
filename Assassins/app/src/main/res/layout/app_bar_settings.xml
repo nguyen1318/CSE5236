@@ -39,25 +39,6 @@
             android:layout_height="?attr/actionBarSize">
 
         </RelativeLayout>
-
-        <!--<Button-->
-        <!--android:id="@+id/addAccountKey"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Link Account Key"-->
-        <!--android:layout_below="@+id/topBar"-->
-        <!--android:layout_alignEnd="@+id/addEventName"-->
-        <!--android:layout_marginTop="24dp" />-->
-
-        <!--<Button-->
-        <!--android:id="@+id/addEventName"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Link Event Name"-->
-        <!--android:layout_marginTop="24dp"-->
-        <!--android:layout_below="@+id/addAccountKey"-->
-        <!--android:layout_centerHorizontal="true" />-->
-
-    </RelativeLayout>
+    ></RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
