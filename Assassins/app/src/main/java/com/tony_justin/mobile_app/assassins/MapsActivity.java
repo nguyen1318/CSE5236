@@ -38,6 +38,7 @@ public class MapsActivity extends AppCompatActivity
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    float[] distance = new float[2];
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
@@ -156,9 +157,14 @@ public class MapsActivity extends AppCompatActivity
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
 
-//        location.distanceBetween(location.getLatitude(), location.getLongitude(),
-//                playZone.getCenter().latitude, playZone.getCenter().longitude, );
+        location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                playZone.getCenter().latitude, playZone.getCenter().longitude, distance);
 
+        if( distance[0] > circle.getRadius()  ){
+            Toast.makeText(getBaseContext(), "Outside", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getBaseContext(), "Inside", Toast.LENGTH_LONG).show();
+        }
 
     }
 
