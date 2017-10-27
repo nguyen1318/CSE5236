@@ -41,23 +41,14 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener{
 
     private static final String TAG = "MainActivity";
-    private static final long FASTEST_INTERVAL = 2000;
-    private static final long UPDATE_INTERVAL = 10000;
 
     private ViewPager mViewPager;
-
-    double lat;
-    double lon;
-    private GoogleApiClient mGoogleApiClient;
-    private Location mLocation;
-    private LocationManager locationManager;
-    private LocationRequest mLocationRequest;
 
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
     Button startNewGame;
-    Button currentGame;
+    Button currentGameMap;
     Button gameInvites;
     Button myStats;
 
@@ -105,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Game Menu Buttons -----------------------------------------------------------------------
         startNewGame = (Button) findViewById(R.id.startNewGame);
-        currentGame = (Button) findViewById(R.id.currentGame);
+        currentGameMap = (Button) findViewById(R.id.currentGameMap);
         gameInvites = (Button) findViewById(R.id.gameInvites);
         myStats = (Button) findViewById(R.id.myStats);
 
@@ -117,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        currentGame.setOnClickListener(new View.OnClickListener() {
+        currentGameMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Bring up their current game, people in it, fragment with map, etc.
                 Intent currentGameIntent = new Intent(MainActivity.this, MapsActivity.class);

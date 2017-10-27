@@ -47,6 +47,9 @@ public class MapsActivity extends AppCompatActivity
     Marker mCurrLocationMarker;
     LatLng latLng;
     Circle playZone;
+    Circle safeZoneThompson;
+    Circle safeZoneUnion;
+    Circle safeZoneRPAC;
     public boolean outOfBounds = true;
 
     @Override
@@ -67,7 +70,7 @@ public class MapsActivity extends AppCompatActivity
 
         Log.d(getClass().getSimpleName(), "Map Activity Paused, location removed from map");
 
-        //stop location updates when Activity is no longer active
+        // Stop location updates when Activity is no longer active
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
@@ -99,12 +102,37 @@ public class MapsActivity extends AppCompatActivity
             mGoogleMap.setMyLocationEnabled(true);
 
         }
+
+        // Different Zones--------------------------------------------------------------------------
+
         playZone = mGoogleMap.addCircle(new CircleOptions()
                 .center(new LatLng(39.999194, -83.014961))
                 .radius(600)
                 .strokeColor(Color.GREEN)
                 .fillColor(0x220000FF)
                 .strokeWidth(5));
+
+        safeZoneThompson = mGoogleMap.addCircle(new CircleOptions()
+                .center(new LatLng(39.999277, -83.014845))
+                .radius(45)
+                .strokeColor(Color.YELLOW)
+                .fillColor(0x220000FF)
+                .strokeWidth(5));
+
+        safeZoneUnion = mGoogleMap.addCircle(new CircleOptions()
+                .center(new LatLng(39.997637, -83.008419))
+                .radius(50)
+                .strokeColor(Color.YELLOW)
+                .fillColor(0x220000FF)
+                .strokeWidth(5));
+
+        safeZoneRPAC = mGoogleMap.addCircle(new CircleOptions()
+                .center(new LatLng(39.999441, -83.018289))
+                .radius(50)
+                .strokeColor(Color.YELLOW)
+                .fillColor(0x220000FF)
+                .strokeWidth(5));
+
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -165,7 +193,7 @@ public class MapsActivity extends AppCompatActivity
             Toast.makeText(getBaseContext(), "Outside of playzone!", Toast.LENGTH_LONG).show();
             outOfBounds = true;
         } else {
-            Toast.makeText(getBaseContext(), "You're good! Get to hunting!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "You're good! Good Luck Assassin!", Toast.LENGTH_LONG).show();
             outOfBounds = false;
         }
 
@@ -238,8 +266,6 @@ public class MapsActivity extends AppCompatActivity
                 return;
             }
 
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
 
