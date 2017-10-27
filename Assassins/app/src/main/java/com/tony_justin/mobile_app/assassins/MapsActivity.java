@@ -47,6 +47,7 @@ public class MapsActivity extends AppCompatActivity
     Marker mCurrLocationMarker;
     LatLng latLng;
     Circle playZone;
+    public boolean outOfBounds = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -160,10 +161,12 @@ public class MapsActivity extends AppCompatActivity
         location.distanceBetween(location.getLatitude(), location.getLongitude(),
                 playZone.getCenter().latitude, playZone.getCenter().longitude, distance);
 
-        if( distance[0] > circle.getRadius()  ){
-            Toast.makeText(getBaseContext(), "Outside", Toast.LENGTH_LONG).show();
+        if( distance[0] > playZone.getRadius()  ){
+            Toast.makeText(getBaseContext(), "Outside of playzone!", Toast.LENGTH_LONG).show();
+            outOfBounds = true;
         } else {
-            Toast.makeText(getBaseContext(), "Inside", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "You're good! Get to hunting!", Toast.LENGTH_LONG).show();
+            outOfBounds = false;
         }
 
     }
