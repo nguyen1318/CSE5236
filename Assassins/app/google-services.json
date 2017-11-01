@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "84192741108",
+    "firebase_url": "https://assassins-1ec15.firebaseio.com",
+    "project_id": "assassins-1ec15",
+    "storage_bucket": "assassins-1ec15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84192741108:android:fa5ae647e8ed1180",
+        "android_client_info": {
+          "package_name": "com.tony_justin.mobile_app.assassin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84192741108-8prf52vj0gsefm794338if9i4b8shvec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tony_justin.mobile_app.assassin",
+            "certificate_hash": "60fc8b1fe0aadddc07d88967d6d8a041df419868"
+          }
+        },
+        {
+          "client_id": "84192741108-80v2vamdt1j3cb77tnuggg4anjcr0k24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2kOzSVvbetmRB29Ed8DdzNLaCeynQgnU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84192741108-80v2vamdt1j3cb77tnuggg4anjcr0k24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -51,6 +51,7 @@ public class MapsActivity extends AppCompatActivity
     Circle safeZoneUnion;
     Circle safeZoneRPAC;
     public boolean outOfBounds = true;
+    public boolean safeZone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -128,7 +129,7 @@ public class MapsActivity extends AppCompatActivity
 
         safeZoneRPAC = mGoogleMap.addCircle(new CircleOptions()
                 .center(new LatLng(39.999441, -83.018289))
-                .radius(50)
+                .radius(55)
                 .strokeColor(Color.YELLOW)
                 .fillColor(0x220000FF)
                 .strokeWidth(5));
@@ -186,6 +187,7 @@ public class MapsActivity extends AppCompatActivity
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
 
+        // Check if in  play zone
         location.distanceBetween(location.getLatitude(), location.getLongitude(),
                 playZone.getCenter().latitude, playZone.getCenter().longitude, distance);
 
@@ -195,6 +197,42 @@ public class MapsActivity extends AppCompatActivity
         } else {
             Toast.makeText(getBaseContext(), "You're good! Good Luck Assassin!", Toast.LENGTH_LONG).show();
             outOfBounds = false;
+        }
+
+        // Safe zone for RPAC
+        location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                safeZoneRPAC.getCenter().latitude, safeZoneRPAC.getCenter().longitude, distance);
+
+        if( distance[0] > safeZoneRPAC.getRadius()  ){
+            Toast.makeText(getBaseContext(), "You're Safe! For the time being...", Toast.LENGTH_LONG).show();
+            safeZone = true;
+        } else {
+            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
+            safeZone = false;
+        }
+
+        // Safe zone for Thompson
+        location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                safeZoneThompson.getCenter().latitude, safeZoneThompson.getCenter().longitude, distance);
+
+        if( distance[0] > safeZoneThompson.getRadius()  ){
+            Toast.makeText(getBaseContext(), "You're Safe! For the time being...", Toast.LENGTH_LONG).show();
+            safeZone = true;
+        } else {
+            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
+            safeZone = false;
+        }
+
+        // Safe zone for Union
+        location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                safeZoneUnion.getCenter().latitude, safeZoneUnion.getCenter().longitude, distance);
+
+        if( distance[0] > safeZoneUnion.getRadius()  ){
+            Toast.makeText(getBaseContext(), "You're Safe! For the time being...", Toast.LENGTH_LONG).show();
+            safeZone = true;
+        } else {
+            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
+            safeZone = false;
         }
 
     }

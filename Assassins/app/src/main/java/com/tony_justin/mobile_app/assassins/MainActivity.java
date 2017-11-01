@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 Intent loginScreen = new Intent(MainActivity.this, LoginActivity.class);
+                
                 ComponentName cn = loginScreen.getComponent();
 
                 Intent logOut = IntentCompat.makeRestartActivityTask(cn);

@@ -18,5 +18,7 @@
     <color name="googleRed">#dd4b39</color>
     <color name="whatsupGreen">#4dc247</color>
     <color name="mycoolred">#00918a</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
 
 </resources>
