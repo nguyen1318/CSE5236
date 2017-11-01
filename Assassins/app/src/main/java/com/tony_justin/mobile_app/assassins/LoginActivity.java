@@ -79,7 +79,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends MainActivity implements View.OnClickListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -129,6 +129,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             updateUI(currentUser);
+            Intent currentGameIntent = new Intent(LoginActivity.this, MainActivity.class);
+            LoginActivity.this.startActivity(currentGameIntent);
+            Toast.makeText(LoginActivity.this, "Current Game Map Initiating", Toast.LENGTH_SHORT).show();
         }
     }
 
