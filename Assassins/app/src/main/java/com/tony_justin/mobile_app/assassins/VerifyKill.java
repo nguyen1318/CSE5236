@@ -1,6 +1,7 @@
 package com.tony_justin.mobile_app.assassins;
 
 import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 
@@ -22,7 +23,7 @@ public class VerifyKill {
          * the rest of the code.
          */
 
-        //LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        //LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         //double longitude = location.getLongitude();
         //double latitude = location.getLatitude();
@@ -30,7 +31,7 @@ public class VerifyKill {
         double lng1 = 32;
         double lat2 = 43;
         double lng2 = 49;
-        final double KILL_RANGE = 0.00284091; // this number corresponds to 15 feet in miles (1 foot = 0.000189394 miles)
+        final double KILL_RANGE = 0.00568182; // this number corresponds to 30 feet in miles (1 foot = 0.000189394 miles)
 
         // lat1 and lng1 are the values of a previously stored location
         if (distance(lat1, lng1, lat2, lng2) < KILL_RANGE) { // if true, we take locations as within designated range

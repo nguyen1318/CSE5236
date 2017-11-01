@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.tony_justin.mobile_app.assassin">
 
 <!-- Testing Location Status permissions -->
@@ -48,8 +49,8 @@ package="com.tony_justin.mobile_app.assassin">
     <activity android:name="com.tony_justin.mobile_app.assassins.MapsActivity" android:label="@string/title_activity_maps"/>
 </application>
 
-<uses-feature android:glEsVersion="0x00020000" android:required="true" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
 
 </manifest>
 
