@@ -1,17 +1,10 @@
 package com.tony_justin.mobile_app.assassins;
 
-import android.Manifest;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -27,10 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.tony_justin.mobile_app.assassin.R;
 
 /**
@@ -129,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 // Show pedometer for the day, kills for the week, deaths for the week
                 // Calories burned, distance walked
+                //Intent myStatsIntent = new Intent(MainActivity.this, MyStatsActivity.class);
+                //MainActivity.this.startActivity(myStatsIntent);
                 Toast.makeText(MainActivity.this, "Showing Stats", Toast.LENGTH_SHORT).show();
             }
         });
