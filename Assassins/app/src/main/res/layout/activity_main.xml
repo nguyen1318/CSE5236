@@ -40,14 +40,13 @@
             android:layout_centerHorizontal="true" />
 
         <Button
-            android:id="@+id/gameInvites"
+            android:id="@+id/currentGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Game Invitations"
+            android:text="Current Game"
             android:layout_marginTop="77dp"
             android:layout_alignTop="@+id/currentGameMap"
-            android:layout_centerHorizontal="true"
-            android:onClick=""/>
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/myStats"

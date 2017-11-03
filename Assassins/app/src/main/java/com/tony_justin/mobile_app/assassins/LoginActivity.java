@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.tony_justin.mobile_app.assassin.R;
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -69,12 +71,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public FirebaseAuth mAuth;
     public String userID;
+    public String email;
 
     Globals g = Globals.getInstance();
 
     private TextView mStatusTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
+
+    DatabaseReference mCredentials = FirebaseDatabase.getInstance().getReference();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -103,7 +108,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(currentUser != null) {
             updateUI(currentUser);
             userID = currentUser.getUid();
+            email = currentUser.getEmail();
             g.setUserID(userID);
+            g.setEmail(email);
+            mCredentials.child("Users").child(g.getUserID()).child("Email").setValue(email);
             Intent currentGameIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(currentGameIntent);
             Toast.makeText(LoginActivity.this, "Main Hub Initiating", Toast.LENGTH_SHORT).show();

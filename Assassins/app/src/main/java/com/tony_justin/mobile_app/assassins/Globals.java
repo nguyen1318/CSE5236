@@ -20,6 +20,16 @@ public class Globals extends Application {
         this.userID = userID;
     }
 
+    private String email;
+
+    public String getEmail(){
+        return userID;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
     public static synchronized Globals getInstance(){
         if(instance==null){
             instance=new Globals();

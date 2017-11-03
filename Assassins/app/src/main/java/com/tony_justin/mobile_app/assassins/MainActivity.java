@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements
     private NavigationView navigationView;
     Button startNewGame;
     Button currentGameMap;
-    Button gameInvites;
+    Button currentGame;
     Button myStats;
 
     @Override
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements
         // Game Menu Buttons -----------------------------------------------------------------------
         startNewGame = (Button) findViewById(R.id.startNewGame);
         currentGameMap = (Button) findViewById(R.id.currentGameMap);
-        gameInvites = (Button) findViewById(R.id.gameInvites);
+        currentGame = (Button) findViewById(R.id.currentGame);
         myStats = (Button) findViewById(R.id.myStats);
 
         startNewGame.setOnClickListener(new View.OnClickListener() {
@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        gameInvites.setOnClickListener(new View.OnClickListener() {
+        currentGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Show the game invitations they received
-                Toast.makeText(MainActivity.this, "Getting Invites", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Getting Current Game", Toast.LENGTH_SHORT).show();
             }
         });
 
