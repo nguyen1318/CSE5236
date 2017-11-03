@@ -40,8 +40,6 @@ package="com.tony_justin.mobile_app.assassin">
         </intent-filter>
     </activity>
 
-    <activity android:name="com.tony_justin.mobile_app.assassins.RegisterActivity" />
-
 
     <!--
          The API key for Google Maps-based APIs is defined as a string resource.
