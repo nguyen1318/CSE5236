@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 // Show pedometer for the day, kills for the week, deaths for the week
                 // Calories burned, distance walked
-                //Intent myStatsIntent = new Intent(MainActivity.this, MyStatsActivity.class);
-                //MainActivity.this.startActivity(myStatsIntent);
+                Intent myStatsIntent = new Intent(MainActivity.this, MyStatsActivity.class);
+                MainActivity.this.startActivity(myStatsIntent);
                 Toast.makeText(MainActivity.this, "Showing Stats", Toast.LENGTH_SHORT).show();
             }
         });
