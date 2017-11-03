@@ -5,25 +5,12 @@ package com.tony_justin.mobile_app.assassins;
  */
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.KeyguardManager;
-import android.app.LoaderManager;
-import android.app.ProgressDialog;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.hardware.fingerprint.FingerprintManager;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
@@ -34,71 +21,56 @@ import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tony_justin.mobile_app.assassin.R;
-
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends MainActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
-    private static final int REQUEST_READ_CONTACTS = 0;
-    private SHA1 hash = new SHA1();
     private static final String TAG = "LoginActivity";
 
     // Fingerprint
     private static final String DIALOG_FRAGMENT_TAG = "myFragment";
     private static final String SECRET_MESSAGE = "Very secret message";
-    private static final String KEY_NAME_NOT_INVALIDATED = "key_not_invalidated";
-    static final String DEFAULT_KEY_NAME = "default_key";
+
 
     private KeyStore mKeyStore;
     private KeyGenerator mKeyGenerator;
     private SharedPreferences mSharedPreferences;
 
-    private FirebaseAuth mAuth;
+    public FirebaseAuth mAuth;
+    public String userID;
+
+    Globals g = Globals.getInstance();
 
     private TextView mStatusTextView;
     private EditText mEmailField;
@@ -127,11 +99,14 @@ public class LoginActivity extends MainActivity implements View.OnClickListener 
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d(TAG, "Init initial values");
         if(currentUser != null) {
             updateUI(currentUser);
+            userID = currentUser.getUid();
+            g.setUserID(userID);
             Intent currentGameIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(currentGameIntent);
-            Toast.makeText(LoginActivity.this, "Current Game Map Initiating", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Main Hub Initiating", Toast.LENGTH_SHORT).show();
         }
     }
 

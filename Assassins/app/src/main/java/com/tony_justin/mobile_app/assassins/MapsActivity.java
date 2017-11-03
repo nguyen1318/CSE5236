@@ -30,6 +30,8 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.tony_justin.mobile_app.assassin.R;
 
 public class MapsActivity extends AppCompatActivity
@@ -38,6 +40,8 @@ public class MapsActivity extends AppCompatActivity
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    private static final String TAG = "MapsActivity";
+
     float[] distance = new float[2];
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
@@ -45,13 +49,19 @@ public class MapsActivity extends AppCompatActivity
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
-    LatLng latLng;
     Circle playZone;
     Circle safeZoneThompson;
     Circle safeZoneUnion;
     Circle safeZoneRPAC;
+
+    public LatLng latLng;
     public boolean outOfBounds = true;
     public boolean safeZone = false;
+    public boolean legit = false;
+
+    DatabaseReference mPlay = FirebaseDatabase.getInstance().getReference();
+
+    Globals g = Globals.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,10 +70,10 @@ public class MapsActivity extends AppCompatActivity
         setContentView(R.layout.activity_maps);
 
         Log.d(getClass().getSimpleName(), "Map Activity Created");
-
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
     }
+
 
     @Override
     public void onPause() {
@@ -195,7 +205,7 @@ public class MapsActivity extends AppCompatActivity
             Toast.makeText(getBaseContext(), "Outside of playzone!", Toast.LENGTH_LONG).show();
             outOfBounds = true;
         } else {
-            Toast.makeText(getBaseContext(), "You're good! Good Luck Assassin!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "You're inside the Play Zone! Good Luck Assassin!", Toast.LENGTH_LONG).show();
             outOfBounds = false;
         }
 
@@ -203,11 +213,10 @@ public class MapsActivity extends AppCompatActivity
         location.distanceBetween(location.getLatitude(), location.getLongitude(),
                 safeZoneRPAC.getCenter().latitude, safeZoneRPAC.getCenter().longitude, distance);
 
-        if( distance[0] > safeZoneRPAC.getRadius()  ){
+        if( distance[0] <= safeZoneRPAC.getRadius()  ){
             Toast.makeText(getBaseContext(), "You're Safe! For the time being...", Toast.LENGTH_LONG).show();
             safeZone = true;
         } else {
-            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
             safeZone = false;
         }
 
@@ -215,11 +224,10 @@ public class MapsActivity extends AppCompatActivity
         location.distanceBetween(location.getLatitude(), location.getLongitude(),
                 safeZoneThompson.getCenter().latitude, safeZoneThompson.getCenter().longitude, distance);
 
-        if( distance[0] > safeZoneThompson.getRadius()  ){
+        if( distance[0] <= safeZoneThompson.getRadius()  ){
             Toast.makeText(getBaseContext(), "You're Safe! For the time being...", Toast.LENGTH_LONG).show();
             safeZone = true;
         } else {
-            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
             safeZone = false;
         }
 
@@ -227,13 +235,25 @@ public class MapsActivity extends AppCompatActivity
         location.distanceBetween(location.getLatitude(), location.getLongitude(),
                 safeZoneUnion.getCenter().latitude, safeZoneUnion.getCenter().longitude, distance);
 
-        if( distance[0] > safeZoneUnion.getRadius()  ){
+        if( distance[0] <= safeZoneUnion.getRadius()  ){
             Toast.makeText(getBaseContext(), "You're Safe! For the time being...", Toast.LENGTH_LONG).show();
             safeZone = true;
         } else {
-            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
             safeZone = false;
         }
+
+        if(!safeZone){
+            Toast.makeText(getBaseContext(), "Outside of safe zone!", Toast.LENGTH_LONG).show();
+        }
+
+        if(!safeZone && !outOfBounds){
+            legit = true;
+        } else {
+            legit = false;
+        }
+
+        mPlay.child("Users").child(g.getUserID()).child("Location").setValue(latLng);
+        mPlay.child("Users").child(g.getUserID()).child("Legit").setValue(legit);
 
     }
 
