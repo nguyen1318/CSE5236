@@ -60,7 +60,6 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         });
 
         mFingerprintContent = v.findViewById(R.id.fingerprint_container);
-        mPassword = (EditText) v.findViewById(R.id.password);
         mFingerprintUiHelper = new FingerprintUiHelper(
                 mActivity.getSystemService(FingerprintManager.class),
                 (ImageView) v.findViewById(R.id.fingerprint_icon),

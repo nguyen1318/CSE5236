@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             email = currentUser.getEmail();
             g.setUserID(userID);
             g.setEmail(email);
-            mCredentials.child("Users").child(g.getUserID()).child("Email").setValue(email);
+            mCredentials.child("Users").child(g.getUserID()).child("Email").setValue(email.replace(".",","));
             Intent currentGameIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(currentGameIntent);
             Toast.makeText(LoginActivity.this, "Main Hub Initiating", Toast.LENGTH_SHORT).show();

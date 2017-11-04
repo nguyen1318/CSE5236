@@ -11,8 +11,15 @@ import com.google.android.gms.maps.model.LatLng;
 public class PlayerInfo extends Application {
 
     private static PlayerInfo instance;
+    public PlayerInfo (String email, LatLng latLng, boolean legit){
 
-    private String userID;
+    }
+
+    private static String userID;
+    private static String email;
+    private static LatLng latLng;
+    private static boolean legit;
+    private static boolean alive;
 
     public String getUserID(){
         return userID;
@@ -23,8 +30,6 @@ public class PlayerInfo extends Application {
     }
 
 
-    private String email;
-
     public String getEmail(){
         return userID;
     }
@@ -34,25 +39,17 @@ public class PlayerInfo extends Application {
     }
 
 
-    private LatLng latLng;
-
     public LatLng getLatLng(){ return latLng;}
 
     public void setLatLng(LatLng latLng) {
         this.latLng = latLng;
     }
 
-
-    private boolean legit;
-
     public boolean getLegit() { return legit;}
 
     public void setLegit(boolean legit) {
         this.legit = legit;
     }
-
-
-    private boolean alive;
 
     public boolean getAlive() { return alive; }
 
@@ -62,7 +59,7 @@ public class PlayerInfo extends Application {
 
     public static synchronized PlayerInfo getInstance(){
         if(instance==null){
-            instance=new PlayerInfo();
+            instance=new PlayerInfo(email, latLng, legit);
         }
         return instance;
     }

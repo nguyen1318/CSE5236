@@ -2,6 +2,7 @@ package com.tony_justin.mobile_app.assassins;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,10 +32,10 @@ public class CurrentGameActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
     FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private RecyclerView recyclerView;
     String userID;
     String userEmail;
+    ArrayList<PlayerInfo> playerInfoArray = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,13 +46,22 @@ public class CurrentGameActivity extends AppCompatActivity {
         myRef = database.getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<String> users = (ArrayList<String>) dataSnapshot.getValue();
+                for(DataSnapshot users : dataSnapshot.getChildren()) {
+                    userID = users.getValue().toString();
+                    PlayerInfo playerInfo = PlayerInfo.getInstance();
+                    playerInfo.setEmail(users.child(userID).child("Email").getValue(PlayerInfo.class).getEmail().replace(",","."));
+                    playerInfo.setLatLng(users.child(userID).child("Location").getValue(PlayerInfo.class).getLatLng());
+                    playerInfo.setLegit(users.child(userID).child("Legit").getValue(PlayerInfo.class).getLegit());
+                    //playerInfo.setAlive(ds.child(userID).child("Alive").getValue(PlayerInfo.class).getAlive());
+                    playerInfoArray.add(new PlayerInfo(playerInfo.getEmail(), playerInfo.getLatLng(), playerInfo.getLegit()));
+
+                }
             }
 
             @Override
@@ -64,17 +74,14 @@ public class CurrentGameActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "Getting Authentication Listener");
-        mAuth.addAuthStateListener(mAuthListener);
+        Log.d(TAG, "Starting Current Game Activity");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "Removing Authentication Listener");
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+        Log.d(TAG, "Stopping Current Game Activity");
+
     }
 
 

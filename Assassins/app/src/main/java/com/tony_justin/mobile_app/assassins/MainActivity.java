@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements
         currentGameMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Bring up their current game, people in it, fragment with map, etc.
-                Intent currentGameIntent = new Intent(MainActivity.this, MapsActivity.class);
-                MainActivity.this.startActivity(currentGameIntent);
+                Intent currentGameMapIntent = new Intent(MainActivity.this, MapsActivity.class);
+                MainActivity.this.startActivity(currentGameMapIntent);
                 Toast.makeText(MainActivity.this, "Current Game Map Initiating", Toast.LENGTH_SHORT).show();
             }
         });
@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements
         currentGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Show the game invitations they received
+                Intent currentGameIntent = new Intent(MainActivity.this, CurrentGameActivity.class);
+                MainActivity.this.startActivity(currentGameIntent);
                 Toast.makeText(MainActivity.this, "Getting Current Game", Toast.LENGTH_SHORT).show();
             }
         });
