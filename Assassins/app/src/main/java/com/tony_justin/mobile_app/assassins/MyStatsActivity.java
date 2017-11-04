@@ -28,7 +28,6 @@ public class MyStatsActivity extends Activity implements SensorEventListener, St
         textView.setTextSize(30);
         setContentView(textView);
 
-
         // Get an instance of the SensorManager
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

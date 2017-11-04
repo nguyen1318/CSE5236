@@ -20,6 +20,7 @@ public class PedometerActivity extends Activity implements SensorEventListener, 
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
     private int numSteps;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,5 +68,3 @@ public class PedometerActivity extends Activity implements SensorEventListener, 
     }
 
 }
-
-

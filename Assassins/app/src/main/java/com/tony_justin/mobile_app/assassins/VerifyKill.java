@@ -1,40 +1,80 @@
 package com.tony_justin.mobile_app.assassins;
 
-import android.app.Activity;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
+import java.util.*;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
- *
- * Source: https://stackoverflow.com/questions/2227292/how-to-get-latitude-and-longitude-of-the-mobile-device-in-android
- *
  * Created by Justin Monte on 10/23/17.
  */
 
 public class VerifyKill {
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mRef;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private String userID;
 
     public boolean checkDistance() {
 
         /*
-         * Get latitude and longitude from each player, these values are currently just placeholders before we implement
-         * the rest of the code.
+         * Get latitude and longitude from each player
          */
 
-        //LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        //double longitude = location.getLongitude();
-        //double latitude = location.getLatitude();
-        double lat1 = 34;
-        double lng1 = 32;
-        double lat2 = 43;
-        double lng2 = 49;
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        final ArrayList<Double> LatArray = new ArrayList<Double>();
+        final ArrayList<Double> LngArray = new ArrayList<Double>();
+        final ArrayList<Boolean> inBoundsArray = new ArrayList<Boolean>();
+
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    for (DataSnapshot users : ds.getChildren()) {
+                        PlayerInfo playerInfo = PlayerInfo.getInstance();
+                        playerInfo.setLegit(users.getValue(PlayerInfo.class).getLegit());
+                        playerInfo.setLatLng(users.getValue(PlayerInfo.class).getLatLng());
+                        LatArray.add(playerInfo.getLatLng().latitude);
+                        LngArray.add(playerInfo.getLatLng().longitude);
+                        inBoundsArray.add(playerInfo.getLegit());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        /*
+        placeholders for now
+         */
+        double lat1 = LatArray.get(0);
+        double lng1 = LngArray.get(0);
+        double lat2 = LatArray.get(1);
+        double lng2 = LngArray.get(1);
         final double KILL_RANGE = 0.00568182; // this number corresponds to 30 feet in miles (1 foot = 0.000189394 miles)
 
         // lat1 and lng1 are the values of a previously stored location
-        if (distance(lat1, lng1, lat2, lng2) < KILL_RANGE) { // if true, we take locations as within designated range
+        if ((distance(lat1, lng1, lat2, lng2) < KILL_RANGE) && inBoundsArray.get(0) && inBoundsArray.get(1) ) { // if true, we take locations as within designated range with both users in the zone
             return true;
         } else {
             return false;
