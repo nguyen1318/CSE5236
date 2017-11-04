@@ -61,7 +61,7 @@ public class MapsActivity extends AppCompatActivity
 
     DatabaseReference mPlay = FirebaseDatabase.getInstance().getReference();
 
-    Globals g = Globals.getInstance();
+    PlayerInfo g = PlayerInfo.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

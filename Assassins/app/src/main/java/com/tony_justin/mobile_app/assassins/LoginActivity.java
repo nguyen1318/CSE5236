@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public String userID;
     public String email;
 
-    Globals g = Globals.getInstance();
+    PlayerInfo g = PlayerInfo.getInstance();
 
     private TextView mStatusTextView;
     private EditText mEmailField;
