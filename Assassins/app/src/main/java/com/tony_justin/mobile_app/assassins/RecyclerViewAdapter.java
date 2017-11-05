@@ -25,9 +25,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            userEmail = (TextView) itemView.findViewById(R.id.userEmail);
-            userLocation = (TextView) itemView.findViewById(R.id.userLocation);
-            userLegit = (TextView) itemView.findViewById(R.id.userLegit);
+            userEmail = (TextView) itemView.findViewById(R.id.textUserEmail);
+            userLocation = (TextView) itemView.findViewById(R.id.textUserLocation);
+            userLegit = (TextView) itemView.findViewById(R.id.textUserLegit);
 
         }
 
@@ -43,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View contactView = inflater.inflate(R.layout.activity_current_game, parent, false);
+        View contactView = inflater.inflate(R.layout.users_recycler_view, parent, false);
         ViewHolder viewHolder = new ViewHolder(contactView);
         return viewHolder;
     }

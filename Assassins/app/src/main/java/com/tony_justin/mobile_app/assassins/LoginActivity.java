@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             email = currentUser.getEmail();
             g.setuserid(userID);
             g.setEmail(email);
+
             mCredentials.child("Users").child(g.getuserid()).child("email").setValue(email);
             Intent currentGameIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(currentGameIntent);

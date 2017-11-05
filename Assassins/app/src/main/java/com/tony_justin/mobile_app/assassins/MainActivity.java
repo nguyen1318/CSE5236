@@ -18,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tony_justin.mobile_app.assassin.R;
@@ -48,11 +50,12 @@ public class MainActivity extends AppCompatActivity implements
 
         Log.d(TAG, "Main Hub Created");
 
+        PlayerInfo playerInfo = PlayerInfo.getInstance();
+
         // Nav Drawer Stuff ------------------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
