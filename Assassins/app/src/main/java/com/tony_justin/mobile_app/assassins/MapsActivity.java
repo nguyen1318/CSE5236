@@ -252,8 +252,8 @@ public class MapsActivity extends AppCompatActivity
             legit = false;
         }
 
-        mPlay.child("Users").child(g.getUserID()).child("Location").setValue(latLng);
-        mPlay.child("Users").child(g.getUserID()).child("Legit").setValue(legit);
+        mPlay.child("Users").child(g.getuserid()).child("location").setValue(latLng);
+        mPlay.child("Users").child(g.getuserid()).child("legit").setValue(legit);
 
     }
 

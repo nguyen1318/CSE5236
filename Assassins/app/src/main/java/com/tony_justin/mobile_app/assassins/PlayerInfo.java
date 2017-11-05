@@ -11,31 +11,31 @@ import com.google.android.gms.maps.model.LatLng;
 public class PlayerInfo extends Application {
 
     private static PlayerInfo instance;
-    public PlayerInfo (String email, LatLng latLng, boolean legit){
+    public PlayerInfo (String Email, LatLng latLng, boolean legit){
 
     }
 
-    private static String userID;
+    private static String userid;
     private static String email;
     private static LatLng latLng;
     private static boolean legit;
     private static boolean alive;
 
-    public String getUserID(){
-        return userID;
+    public String getuserid(){
+        return userid;
     }
 
-    public void setUserID(String userID){
-        this.userID = userID;
+    public void setuserid(String userid){
+        this.userid = userid;
     }
 
 
     public String getEmail(){
-        return userID;
+        return email;
     }
 
-    public void setEmail(String email){
-        this.email = email;
+    public void setEmail(String Email){
+        this.email = Email;
     }
 
 

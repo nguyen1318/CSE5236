@@ -109,9 +109,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             updateUI(currentUser);
             userID = currentUser.getUid();
             email = currentUser.getEmail();
-            g.setUserID(userID);
+            g.setuserid(userID);
             g.setEmail(email);
-            mCredentials.child("Users").child(g.getUserID()).child("Email").setValue(email.replace(".",","));
+            mCredentials.child("Users").child(g.getuserid()).child("email").setValue(email);
             Intent currentGameIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(currentGameIntent);
             Toast.makeText(LoginActivity.this, "Main Hub Initiating", Toast.LENGTH_SHORT).show();

@@ -1,14 +1,12 @@
 package com.tony_justin.mobile_app.assassins;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +32,7 @@ public class CurrentGameActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private RecyclerView recyclerView;
     String userID;
-    String userEmail;
+    String otherUserID;
     ArrayList<PlayerInfo> playerInfoArray = new ArrayList<>();
 
     @Override
@@ -46,6 +44,11 @@ public class CurrentGameActivity extends AppCompatActivity {
         myRef = database.getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
+        if(userID.equals("Ix7757FCsyXDuXXVV99nRtPf89C3")) {
+            otherUserID = "yRY0cXSmgsNNqTPAOWoG9mecjh92";
+        } else {
+            otherUserID = "Ix7757FCsyXDuXXVV99nRtPf89C3";
+        }
         //recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
 
@@ -53,12 +56,20 @@ public class CurrentGameActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot users : dataSnapshot.getChildren()) {
-                    userID = users.getValue().toString();
                     PlayerInfo playerInfo = PlayerInfo.getInstance();
-                    playerInfo.setEmail(users.child(userID).child("Email").getValue(PlayerInfo.class).getEmail().replace(",","."));
-                    playerInfo.setLatLng(users.child(userID).child("Location").getValue(PlayerInfo.class).getLatLng());
-                    playerInfo.setLegit(users.child(userID).child("Legit").getValue(PlayerInfo.class).getLegit());
-                    //playerInfo.setAlive(ds.child(userID).child("Alive").getValue(PlayerInfo.class).getAlive());
+//                    playerInfo.setEmail(users.child(userID).getValue(PlayerInfo.class).getEmail());
+                    playerInfo.setEmail(users.child(otherUserID).child("email").getKey());
+
+//                    playerInfo.setLatLng(users.child(userID).getValue(PlayerInfo.class).getLatLng());
+                    LatLng temp = new LatLng(users.child(otherUserID).child("location").child("latitude").getValue(Double.class).doubleValue(), users.child(userID).child("location").child("longitude").getValue(Double.class).doubleValue());
+//                    playerInfo.setLatLng(users.child(userID).child("location").getValue(LatLng.class).);
+                    playerInfo.setLatLng(temp);
+
+//                    playerInfo.setLegit(users.child(userID).getValue(PlayerInfo.class).getLegit());
+                    playerInfo.setLegit(users.child(otherUserID).child("legit").getValue(boolean.class).booleanValue());
+
+//                    playerInfo.setAlive(users.child(userID).child("Alive").getValue(PlayerInfo.class).getAlive());
+                    
                     playerInfoArray.add(new PlayerInfo(playerInfo.getEmail(), playerInfo.getLatLng(), playerInfo.getLegit()));
 
                 }
