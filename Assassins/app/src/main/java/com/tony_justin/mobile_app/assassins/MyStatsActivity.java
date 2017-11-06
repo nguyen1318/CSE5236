@@ -19,6 +19,7 @@ public class MyStatsActivity extends Activity implements SensorEventListener, St
     private Sensor accelerometer;
     private static final String TEXT_TOT_STEPS = "Your Total Steps:  ";
     private int numSteps;
+    private boolean test;
 
 
     @Override
@@ -65,6 +66,7 @@ public class MyStatsActivity extends Activity implements SensorEventListener, St
     public void step(long timeNs) {
         numSteps++;
         textView.setText(TEXT_TOT_STEPS + numSteps);
+
     }
 
 }
