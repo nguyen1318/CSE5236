@@ -24,6 +24,11 @@ public class VerifyKill {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userID;
+    private String otherUserID;
+    double lat1;
+    double lat2;
+    double lng1;
+    double lng2;
 
     public boolean checkDistance() {
 
@@ -35,6 +40,11 @@ public class VerifyKill {
         mRef = mFirebaseDatabase.getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
+        if(userID.equals("Ix7757FCsyXDuXXVV99nRtPf89C3")) {
+            otherUserID = "yRY0cXSmgsNNqTPAOWoG9mecjh92";
+        } else {
+            otherUserID = "Ix7757FCsyXDuXXVV99nRtPf89C3";
+        }
         final ArrayList<Double> LatArray = new ArrayList<Double>();
         final ArrayList<Double> LngArray = new ArrayList<Double>();
         final ArrayList<Boolean> inBoundsArray = new ArrayList<Boolean>();
@@ -44,15 +54,26 @@ public class VerifyKill {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    for (DataSnapshot users : ds.getChildren()) {
+                for (DataSnapshot users : dataSnapshot.getChildren()) {
+
                         PlayerInfo playerInfo = PlayerInfo.getInstance();
-                        playerInfo.setLegit(users.getValue(PlayerInfo.class).getLegit());
-                        playerInfo.setLatLng(users.getValue(PlayerInfo.class).getLatLng());
-                        LatArray.add(playerInfo.getLatLng().latitude);
-                        LngArray.add(playerInfo.getLatLng().longitude);
+
+                        //set and get the data
+                        playerInfo.setLegit(users.child(otherUserID).child("legit").getValue(boolean.class));
                         inBoundsArray.add(playerInfo.getLegit());
-                    }
+                        playerInfo.setLegit(users.child(userID).child("legit").getValue(boolean.class));
+                        inBoundsArray.add(playerInfo.getLegit());
+                        //playerInfo.setLatLng(users.getValue(PlayerInfo.class).getLatLng());
+
+
+                        //LatArray.add(playerInfo.getLatLng().latitude);
+                        //LngArray.add(playerInfo.getLatLng().longitude);
+                        lat1 = users.child(otherUserID).child("location").child("latitude").getValue(Double.class);
+                        lng1 = users.child(otherUserID).child("location").child("longitude").getValue(Double.class);
+                        lat2 = users.child(userID).child("location").child("latitude").getValue(Double.class);
+                        lng2 = users.child(userID).child("location").child("longitude").getValue(Double.class);
+
+
 
                 }
             }
@@ -64,13 +85,7 @@ public class VerifyKill {
         });
 
 
-        /*
-        placeholders for now
-         */
-        double lat1 = LatArray.get(0);
-        double lng1 = LngArray.get(0);
-        double lat2 = LatArray.get(1);
-        double lng2 = LngArray.get(1);
+
         final double KILL_RANGE = 0.00568182; // this number corresponds to 30 feet in miles (1 foot = 0.000189394 miles)
 
         // lat1 and lng1 are the values of a previously stored location
