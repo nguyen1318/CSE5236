@@ -14,35 +14,42 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textUserLegit"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/textUserLegit"
             android:layout_toStartOf="@+id/textUserLegit"
             android:textAlignment="center"
             android:textColor="@color/colorBlack"
-            android:textSize="8pt" />
+            android:textSize="6pt" />
 
         <TextView
             android:id="@+id/textUserLegit"
-            android:layout_width="75dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textUserLocation"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/killButton"
             android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:textSize="8pt" />
 
-        <TextView
-            android:id="@+id/textUserLocation"
-            android:layout_width="150dp"
+        <!--<TextView-->
+            <!--android:id="@+id/textUserLocation"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_toEndOf="@+id/textUserLegit"-->
+            <!--android:layout_weight="66.67"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--android:textSize="8pt" />-->
+
+        <Button
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/textUserLegit"
-            android:layout_weight="66.67"
-            android:textAlignment="center"
-            android:textColor="@color/colorBlack"
-            android:textSize="8pt" />
+            android:layout_centerVertical="true"
+            android:id="@+id/killButton"
+            android:text="Eliminate"/>
 
     </RelativeLayout>
 

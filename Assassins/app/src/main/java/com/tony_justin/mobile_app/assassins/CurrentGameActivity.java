@@ -1,5 +1,6 @@
 package com.tony_justin.mobile_app.assassins;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class CurrentGameActivity extends AppCompatActivity {
     String otherUserID;
     List<PlayerInfo> playerInfoArray = new ArrayList<>();
     int i = 0;
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class CurrentGameActivity extends AppCompatActivity {
                     PlayerInfo tempPlayer = new PlayerInfo(playerInfo.getEmail(), playerInfo.getLatLng(), playerInfo.getLegit());
                     playerInfoArray.add(i , tempPlayer);
                     i++;
-                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(playerInfoArray);
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(CurrentGameActivity.this, playerInfoArray);
                     recyclerView.setLayoutManager((new LinearLayoutManager(CurrentGameActivity.this)));
                     recyclerView.setAdapter(adapter);
                     if(playerInfoArray.size() == 0 ){

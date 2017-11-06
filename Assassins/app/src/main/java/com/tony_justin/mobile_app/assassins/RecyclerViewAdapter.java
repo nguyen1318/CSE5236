@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tony_justin.mobile_app.assassin.R;
 
@@ -19,26 +21,30 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
+    private final Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView userEmail;
-        public TextView userLocation;
+//        public TextView userLocation;
         public TextView userLegit;
+        public Button killButton;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             userEmail = (TextView) itemView.findViewById(R.id.textUserEmail);
-            userLocation = (TextView) itemView.findViewById(R.id.textUserLocation);
+//            userLocation = (TextView) itemView.findViewById(R.id.textUserLocation);
             userLegit = (TextView) itemView.findViewById(R.id.textUserLegit);
+            killButton = (Button) itemView.findViewById(R.id.killButton);
 
         }
 
     }
     private List<PlayerInfo> mPlayerInfo;
 
-    public RecyclerViewAdapter(List<PlayerInfo> playerInfo) {
+    public RecyclerViewAdapter(Context context, List<PlayerInfo> playerInfo) {
         mPlayerInfo = playerInfo;
+        this.context = context;
     }
 
 
@@ -60,14 +66,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView mUserEmail = viewHolder.userEmail;
         mUserEmail.setText(playerInfo.getEmail());
 
-        TextView mUserLocation = viewHolder.userLocation;
-        mUserLocation.setText(playerInfo.getLatLng().toString());
+//        TextView mUserLocation = viewHolder.userLocation;
+//        mUserLocation.setText(playerInfo.getLatLng().toString());
 
         TextView mUserLegit = viewHolder.userLegit;
+        Button mKillButton = viewHolder.killButton;
         if(playerInfo.getLegit()){
-            mUserLegit.setText("Legit: T");
+            mUserLegit.setText("Legit: True");
+            mKillButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Target Eliminated", Toast.LENGTH_SHORT);
+                    Log.d(TAG, "Target Eliminated");
+
+                    //Use Verify Kill code/class here
+                    //Or disable the button underneath, or make a nested if statement to include distance
+                    //Remember to change "legit" to false after killing
+
+                }
+            });
         } else {
-            mUserLegit.setText("Legit: F");
+            mUserLegit.setText("Legit: False");
+            mKillButton.setAlpha(.5f);
+            mKillButton.setClickable(false);
+            mKillButton.setText("Disabled");
         }
     }
 
