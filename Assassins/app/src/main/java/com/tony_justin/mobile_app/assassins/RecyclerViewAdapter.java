@@ -85,10 +85,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Log.d(TAG, "Target Eliminated");
 
                     //Use Verify Kill code/class here
-
                     //Or disable the button underneath, or make a nested if statement to include distance
                     //Remember to change "legit" to false after killing
-
                 }
             });
         } else {
