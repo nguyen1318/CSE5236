@@ -81,7 +81,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mKillButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Target Eliminated", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Target Eliminated", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Target Eliminated");
 
                     //Use Verify Kill code/class here
