@@ -76,8 +76,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         boolean verified;
         verified = verifyKill.checkDistance();
 
-        if(verified){
+        if(playerInfo.getLegit()) {
             mUserLegit.setText("Legit: True");
+        } else {
+            mUserLegit.setText("Legit: False");
+        }
+
+        if(verified){
+
             mKillButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,7 +96,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             });
         } else {
-            mUserLegit.setText("Legit: False");
             mKillButton.setAlpha(.5f);
             mKillButton.setClickable(false);
             mKillButton.setText("Disabled");
