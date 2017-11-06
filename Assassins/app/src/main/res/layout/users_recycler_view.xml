@@ -2,42 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:weightSum="100">
 
         <TextView
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorBlack"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textUserEmail"
-            android:layout_weight="50"/>
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textUserLegit"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/textUserLegit"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="8pt" />
 
         <TextView
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorBlack"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textUserLegit"
-            android:layout_weight="50"/>
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textUserLocation"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="8pt" />
 
         <TextView
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorBlack"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textUserLocation"
-            android:layout_weight="50"/>
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textUserLegit"
+            android:layout_weight="66.67"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="8pt" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

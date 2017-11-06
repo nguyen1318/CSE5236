@@ -6,6 +6,7 @@ package com.tony_justin.mobile_app.assassins;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.tony_justin.mobile_app.assassin.R;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
+    private static final String TAG = "RecyclerViewAdapter";
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -52,17 +55,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         PlayerInfo playerInfo = mPlayerInfo.get(position);
 
+        Log.d(TAG, "Setting Recycler List View");
+
         TextView mUserEmail = viewHolder.userEmail;
-        mUserEmail.setText("Email: " + playerInfo.getEmail());
+        mUserEmail.setText(playerInfo.getEmail());
 
         TextView mUserLocation = viewHolder.userLocation;
-        mUserLocation.setText("Location: " + playerInfo.getLatLng().toString());
+        mUserLocation.setText(playerInfo.getLatLng().toString());
 
-        TextView mUserLegit = viewHolder.userLocation;
+        TextView mUserLegit = viewHolder.userLegit;
         if(playerInfo.getLegit()){
-            mUserLegit.setText("Legit: True");
+            mUserLegit.setText("Legit: T");
         } else {
-            mUserLegit.setText("Legit: False");
+            mUserLegit.setText("Legit: F");
         }
     }
 

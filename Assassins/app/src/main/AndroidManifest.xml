@@ -22,7 +22,7 @@ package="com.tony_justin.mobile_app.assassin">
     <activity android:name="com.tony_justin.mobile_app.assassins.ActivityConnect" />
     <activity android:name="com.tony_justin.mobile_app.assassins.ActivitySearch" />
     <activity android:name="com.tony_justin.mobile_app.assassins.CurrentGameActivity" />
-
+    <activity android:name="com.tony_justin.mobile_app.assassins.MyStatsActivity" />
 
     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 

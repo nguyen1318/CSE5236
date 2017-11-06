@@ -54,11 +54,13 @@ public class CurrentGameActivity extends AppCompatActivity {
             otherUserID = "Ix7757FCsyXDuXXVV99nRtPf89C3";
         }
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv);
+        //recyclerView = (RecyclerView) findViewById(R.id.rv);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                recyclerView = (RecyclerView) findViewById(R.id.rv);
+
                 for(DataSnapshot users : dataSnapshot.getChildren()) {
                     Log.d(TAG, "Getting info from Database");
                     PlayerInfo playerInfo = PlayerInfo.getInstance();
@@ -81,9 +83,15 @@ public class CurrentGameActivity extends AppCompatActivity {
 
 //                    playerInfo.setAlive(users.child(userID).child("Alive").getValue(PlayerInfo.class).getAlive());
 
-                    playerInfoArray.add(i , new PlayerInfo(playerInfo.getEmail(), playerInfo.getLatLng(), playerInfo.getLegit()));
+                    PlayerInfo tempPlayer = new PlayerInfo(playerInfo.getEmail(), playerInfo.getLatLng(), playerInfo.getLegit());
+                    playerInfoArray.add(i , tempPlayer);
                     i++;
-
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(playerInfoArray);
+                    recyclerView.setLayoutManager((new LinearLayoutManager(CurrentGameActivity.this)));
+                    recyclerView.setAdapter(adapter);
+                    if(playerInfoArray.size() == 0 ){
+                        Toast.makeText(CurrentGameActivity.this, "No data to show!", Toast.LENGTH_SHORT);
+                    }
                 }
 
             }
@@ -94,12 +102,7 @@ public class CurrentGameActivity extends AppCompatActivity {
             }
         });
 
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(playerInfoArray);
-            recyclerView.setLayoutManager((new LinearLayoutManager(this)));
-            recyclerView.setAdapter(adapter);
-            if(playerInfoArray.size() == 0 ){
-                Toast.makeText(this, "No data to show!", Toast.LENGTH_SHORT);
-            }
+
 
     }
 
