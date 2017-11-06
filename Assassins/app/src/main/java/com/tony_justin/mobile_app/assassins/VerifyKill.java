@@ -29,6 +29,7 @@ public class VerifyKill {
     double lat2;
     double lng1;
     double lng2;
+    public boolean verified;
 
     public boolean checkDistance() {
 
@@ -37,6 +38,7 @@ public class VerifyKill {
          */
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mRef = mFirebaseDatabase.getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
@@ -74,6 +76,14 @@ public class VerifyKill {
                         lng2 = users.child(userID).child("location").child("longitude").getValue(Double.class);
 
 
+                    final double KILL_RANGE = 0.00568182; // this number corresponds to 30 feet in miles (1 foot = 0.000189394 miles)
+
+                    // lat1 and lng1 are the values of a previously stored location
+                    if ((distance(lat1, lng1, lat2, lng2) < KILL_RANGE) && inBoundsArray.get(0) && inBoundsArray.get(1) ) { // if true, we take locations as within designated range with both users in the zone
+                        verified = true;
+                    } else {
+                        verified = false;
+                    }
 
                 }
             }
@@ -86,14 +96,7 @@ public class VerifyKill {
 
 
 
-        final double KILL_RANGE = 0.00568182; // this number corresponds to 30 feet in miles (1 foot = 0.000189394 miles)
-
-        // lat1 and lng1 are the values of a previously stored location
-        if ((distance(lat1, lng1, lat2, lng2) < KILL_RANGE) && inBoundsArray.get(0) && inBoundsArray.get(1) ) { // if true, we take locations as within designated range with both users in the zone
-            return true;
-        } else {
-            return false;
-        }
+        return verified;
     }
 
     /*
