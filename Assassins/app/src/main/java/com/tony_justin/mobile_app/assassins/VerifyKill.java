@@ -11,6 +11,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.location.Location;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 
 /**
@@ -30,6 +34,8 @@ public class VerifyKill {
     double lng1;
     double lng2;
     public boolean verified;
+    float distance;
+    Location mLastLocation;
 
     public boolean checkDistance() {
 
@@ -62,9 +68,11 @@ public class VerifyKill {
 
                         //set and get the data
                         playerInfo.setLegit(users.child(otherUserID).child("legit").getValue(boolean.class));
-                        inBoundsArray.add(playerInfo.getLegit());
+                        boolean l1 = playerInfo.getLegit();
+                        //inBoundsArray.add(playerInfo.getLegit());
                         playerInfo.setLegit(users.child(userID).child("legit").getValue(boolean.class));
-                        inBoundsArray.add(playerInfo.getLegit());
+                        boolean l2 = playerInfo.getLegit();
+                        //inBoundsArray.add(playerInfo.getLegit());
                         //playerInfo.setLatLng(users.getValue(PlayerInfo.class).getLatLng());
 
 
@@ -79,7 +87,17 @@ public class VerifyKill {
                     final double KILL_RANGE = 0.00568182; // this number corresponds to 30 feet in miles (1 foot = 0.000189394 miles)
 
                     // lat1 and lng1 are the values of a previously stored location
-                    if ((distance(lat1, lng1, lat2, lng2) < KILL_RANGE) && inBoundsArray.get(0) && inBoundsArray.get(1) ) { // if true, we take locations as within designated range with both users in the zone
+
+                    Location loc1 = new Location("");
+                    loc1.setLatitude(lat1);
+                    loc1.setLongitude(lng1);
+
+                    Location loc2 = new Location("");
+                    loc2.setLatitude(lat2);
+                    loc2.setLongitude(lng2);
+                    distance = loc1.distanceTo(loc2);
+
+                    if ((distance < KILL_RANGE) && l1 && l2) { // if true, we take locations as within designated range with both users in the zone
                         verified = true;
                     } else {
                         verified = false;
