@@ -22,6 +22,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.tony_justin.mobile_app.assassin.R;
 
 /**
@@ -42,6 +46,12 @@ public class MainActivity extends AppCompatActivity implements
     Button currentGameMap;
     Button currentGame;
     Button myStats;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mRef;
+    private FirebaseAuth mAuth;
+    private String userID;
+    private String otherUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +103,24 @@ public class MainActivity extends AppCompatActivity implements
         currentGame = (Button) findViewById(R.id.currentGame);
         myStats = (Button) findViewById(R.id.myStats);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        if(userID.equals("Ix7757FCsyXDuXXVV99nRtPf89C3")) {
+            otherUserID = "yRY0cXSmgsNNqTPAOWoG9mecjh92";
+        } else {
+            otherUserID = "Ix7757FCsyXDuXXVV99nRtPf89C3";
+        }
+
         startNewGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Make a pop-up dialog box asking if they want to start a new game?
                 // It will delete their previous game since only one game is allowed at a time.
-                Toast.makeText(MainActivity.this, "Starting New Game", Toast.LENGTH_SHORT).show();
+                mRef.child("Users").child(userID).child("Alive").setValue(true);
+                mRef.child("Users").child(otherUserID).child("Alive").setValue(true);
+                Toast.makeText(MainActivity.this, "Starting New Game: Players reset to Alive", Toast.LENGTH_SHORT).show();
             }
         });
 

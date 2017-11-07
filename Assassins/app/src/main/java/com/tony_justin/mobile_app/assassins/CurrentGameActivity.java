@@ -1,6 +1,5 @@
 package com.tony_justin.mobile_app.assassins;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +38,6 @@ public class CurrentGameActivity extends AppCompatActivity {
     String otherUserID;
     List<PlayerInfo> playerInfoArray = new ArrayList<>();
     int i = 0;
-    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
