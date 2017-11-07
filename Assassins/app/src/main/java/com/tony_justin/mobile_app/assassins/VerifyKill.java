@@ -13,6 +13,7 @@ import android.location.Location;
 import android.util.Log;
 
 
+
 /**
  * Created by Justin Monte on 10/23/17.
  */
@@ -28,6 +29,7 @@ public class VerifyKill {
     double lng2;
     boolean verified;
     float distance;
+
 
     private static final String TAG = "VerifyKill";
 
@@ -63,6 +65,10 @@ public class VerifyKill {
                         boolean l1 = playerInfo.getLegit();
                         playerInfo.setLegit(users.child(userID).child("legit").getValue(boolean.class));
                         boolean l2 = playerInfo.getLegit();
+                        //inBoundsArray.add(playerInfo.getLegit());
+                        playerInfo.setLegit(users.child(userID).child("legit").getValue(boolean.class));
+                        //inBoundsArray.add(playerInfo.getLegit());
+                        //playerInfo.setLatLng(users.getValue(PlayerInfo.class).getLatLng());
 
                         lat1 = users.child(otherUserID).child("location").child("latitude").getValue(Double.class);
                         lng1 = users.child(otherUserID).child("location").child("longitude").getValue(Double.class);
