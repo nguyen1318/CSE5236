@@ -2,19 +2,15 @@ package com.tony_justin.mobile_app.assassins;
 
 import java.util.*;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import android.location.Location;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
+import android.util.Log;
 
 
 /**
@@ -23,22 +19,22 @@ import com.google.android.gms.location.LocationServices;
 
 public class VerifyKill {
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mRef;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private String userID;
-    private String otherUserID;
+
+    String userID;
+    String otherUserID;
     double lat1;
     double lat2;
     double lng1;
     double lng2;
-    public boolean verified;
+    boolean verified;
     float distance;
-    Location mLastLocation;
+
+    private static final String TAG = "VerifyKill";
 
     public boolean checkDistance() {
-
+        FirebaseDatabase mFirebaseDatabase;
+        DatabaseReference mRef;
+        FirebaseAuth mAuth;
         /*
          * Get latitude and longitude from each player
          */
@@ -53,10 +49,6 @@ public class VerifyKill {
         } else {
             otherUserID = "Ix7757FCsyXDuXXVV99nRtPf89C3";
         }
-        final ArrayList<Double> LatArray = new ArrayList<Double>();
-        final ArrayList<Double> LngArray = new ArrayList<Double>();
-        final ArrayList<Boolean> inBoundsArray = new ArrayList<Boolean>();
-
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,15 +61,9 @@ public class VerifyKill {
                         //set and get the data
                         playerInfo.setLegit(users.child(otherUserID).child("legit").getValue(boolean.class));
                         boolean l1 = playerInfo.getLegit();
-                        //inBoundsArray.add(playerInfo.getLegit());
                         playerInfo.setLegit(users.child(userID).child("legit").getValue(boolean.class));
                         boolean l2 = playerInfo.getLegit();
-                        //inBoundsArray.add(playerInfo.getLegit());
-                        //playerInfo.setLatLng(users.getValue(PlayerInfo.class).getLatLng());
 
-
-                        //LatArray.add(playerInfo.getLatLng().latitude);
-                        //LngArray.add(playerInfo.getLatLng().longitude);
                         lat1 = users.child(otherUserID).child("location").child("latitude").getValue(Double.class);
                         lng1 = users.child(otherUserID).child("location").child("longitude").getValue(Double.class);
                         lat2 = users.child(userID).child("location").child("latitude").getValue(Double.class);
@@ -97,22 +83,25 @@ public class VerifyKill {
                     loc2.setLongitude(lng2);
                     distance = loc1.distanceTo(loc2);
 
+
                     if ((distance < KILL_RANGE) && l1 && l2) { // if true, we take locations as within designated range with both users in the zone
                         verified = true;
                     } else {
                         verified = false;
                     }
 
+                    Log.d(TAG, "Verified1: " + verified);
 
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.e(TAG, "Failed to read Value.");
             }
         });
 
+        Log.d(TAG, "Verified2: " + verified);
 
 
         return verified;

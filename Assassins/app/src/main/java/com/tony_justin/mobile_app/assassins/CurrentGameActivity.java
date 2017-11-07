@@ -88,7 +88,7 @@ public class CurrentGameActivity extends AppCompatActivity {
                     PlayerInfo tempPlayer = new PlayerInfo(playerInfo.getEmail(), playerInfo.getLatLng(), playerInfo.getLegit());
                     playerInfoArray.add(i , tempPlayer);
                     i++;
-                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(CurrentGameActivity.this, playerInfoArray);
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(CurrentGameActivity.this ,playerInfoArray);
                     recyclerView.setLayoutManager((new LinearLayoutManager(CurrentGameActivity.this)));
                     recyclerView.setAdapter(adapter);
                     if(playerInfoArray.size() == 0 ){
