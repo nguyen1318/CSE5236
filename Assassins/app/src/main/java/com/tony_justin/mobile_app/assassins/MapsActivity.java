@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
@@ -72,6 +73,7 @@ public class MapsActivity extends AppCompatActivity
         Log.d(getClass().getSimpleName(), "Map Activity Created");
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+
     }
 
 
@@ -160,8 +162,8 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(30*1000);
+        mLocationRequest.setFastestInterval(10*1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -180,6 +182,8 @@ public class MapsActivity extends AppCompatActivity
     public void onLocationChanged(Location location)
     {
         Log.d(getClass().getSimpleName(), "Location Changed and Updated");
+
+
 
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
