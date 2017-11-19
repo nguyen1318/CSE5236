@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:screenOrientation="portrait">
 
 
     <include
@@ -14,50 +15,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/startNewGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start New Game"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            <Button
+                android:id="@+id/startNewGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="146dp"
+                android:text="Start New Game" />
 
-        <Button
-            android:id="@+id/currentGameMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current Game Map"
-            android:layout_marginTop="35dp"
-            android:layout_below="@+id/startNewGame"
-            android:layout_centerHorizontal="true" />
+            <Button
+                android:id="@+id/currentGameMap"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/startNewGame"
+                android:layout_below="@+id/startNewGame"
+                android:layout_marginTop="28dp"
+                android:text="Current Game Map" />
 
-        <Button
-            android:id="@+id/currentGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current Game"
-            android:layout_marginTop="77dp"
-            android:layout_alignTop="@+id/currentGameMap"
-            android:layout_centerHorizontal="true" />
+            <Button
+                android:id="@+id/currentGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignEnd="@+id/startNewGame"
+                android:layout_below="@+id/currentGameMap"
+                android:layout_marginTop="30dp"
+                android:text="Current Game" />
 
-        <Button
-            android:id="@+id/myStats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Stats"
-            android:layout_marginBottom="22dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
+            <Button
+                android:id="@+id/myStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignEnd="@+id/currentGame"
+                android:layout_below="@+id/currentGame"
+                android:layout_marginEnd="13dp"
+                android:layout_marginTop="45dp"
+                android:text="My Stats" />
+        </RelativeLayout>
+    </ScrollView>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -77,7 +82,8 @@
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:id="@+id/linearLayout">
 
                 <!--Here is a container at the bottom of navigation drawer. Place your images here-->
 
@@ -91,6 +97,8 @@
                     android:backgroundTint="@color/colorPrimaryLight"
                     android:textColor="@color/colorWhite"/>
             </LinearLayout>
+
+
 
         </RelativeLayout>
     </android.support.design.widget.NavigationView>
