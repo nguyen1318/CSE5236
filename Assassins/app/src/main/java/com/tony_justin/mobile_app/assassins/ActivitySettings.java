@@ -40,8 +40,6 @@ public class ActivitySettings extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private NavigationView navigationView;
 
-    private Context context = this;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
