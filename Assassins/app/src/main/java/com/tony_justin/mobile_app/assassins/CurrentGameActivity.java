@@ -38,6 +38,7 @@ public class CurrentGameActivity extends AppCompatActivity {
     String otherUserID;
     List<PlayerInfo> playerInfoArray = new ArrayList<>();
     int i = 0;
+    private int playCount = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,6 +110,7 @@ public class CurrentGameActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        playCount = 1;
         Log.d(TAG, "Starting Current Game Activity");
     }
 
@@ -117,6 +119,10 @@ public class CurrentGameActivity extends AppCompatActivity {
         super.onStop();
         Log.d(TAG, "Stopping Current Game Activity");
 
+    }
+
+    public int getPlayCount() {
+        return playCount;
     }
 
 }

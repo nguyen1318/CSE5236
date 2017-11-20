@@ -69,4 +69,8 @@ public class MyStatsActivity extends Activity implements SensorEventListener, St
 
     }
 
+    public int numberOfSteps() {
+        return numSteps;
+    }
+
 }
