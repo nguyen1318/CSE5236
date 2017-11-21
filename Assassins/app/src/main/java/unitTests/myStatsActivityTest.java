@@ -1,4 +1,4 @@
-package androidTest;
+package unitTests;
 import android.test.ActivityInstrumentationTestCase2;
 import com.tony_justin.mobile_app.assassins.MyStatsActivity;
 
