@@ -21,8 +21,6 @@ public class myStatsActivityTest extends ActivityInstrumentationTestCase2<MyStat
 
         mMyStatsActivity = getActivity();
 
-        getInstrumentation().waitForIdleSync();
-
     }
 
     @Test

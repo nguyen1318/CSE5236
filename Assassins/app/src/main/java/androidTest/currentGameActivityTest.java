@@ -15,6 +15,7 @@ import com.tony_justin.mobile_app.assassins.CurrentGameActivity;
 public class currentGameActivityTest extends ActivityInstrumentationTestCase2<CurrentGameActivity> {
 
     private CurrentGameActivity mCurrentGameActivity;
+    private boolean t = true;
 
 
     public currentGameActivityTest() {
@@ -27,15 +28,13 @@ public class currentGameActivityTest extends ActivityInstrumentationTestCase2<Cu
 
         mCurrentGameActivity = getActivity();
 
-        getInstrumentation().waitForIdleSync();
-
 
     }
 
     @Test
     public void testPreconditions() {
-        //assertNotNull(mCurrentGameActivity);
-        assertTrue(true);
+        assertNotNull(mCurrentGameActivity);
+        //assertTrue("this is true!", true);
     }
 
 
