@@ -23,8 +23,6 @@ public class mapsActivityTest extends ActivityInstrumentationTestCase2<MapsActiv
 
         mMapsActivity = getActivity();
 
-        getInstrumentation().waitForIdleSync();
-
 
     }
 
